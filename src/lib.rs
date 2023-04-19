@@ -13,7 +13,7 @@ pub mod lib
     impl Fraction
     {
         /// Creates a fraction that is fully simplified. 
-        /// Will panic if denominator is 0. 
+        /// Will return `DivByZeroError` if denominator is 0. 
         pub fn new(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
         {
             let fraction = Fraction::unsimplified_new(numerator, denominator)?;
@@ -22,7 +22,7 @@ pub mod lib
         }
         
         /// Creates a fraction that has no fractional simplification applied to it. 
-        /// Will panic if denominator is 0. 
+        /// Will return `DivByZeroError` if denominator is 0. 
         pub fn unsimplified_new(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
         {
             if denominator == 0
