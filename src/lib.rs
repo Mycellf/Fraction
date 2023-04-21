@@ -192,8 +192,8 @@ pub mod lib
         {
             let denominator_gcd = gcd(self.denominator, rhs.denominator);
 
-            let mut numerator = self.numerator * (rhs.denominator / denominator_gcd) as i32;
-            numerator += rhs.numerator * (self.denominator / denominator_gcd) as i32;
+            let numerator = self.numerator * (rhs.denominator / denominator_gcd) as i32
+                + rhs.numerator * (self.denominator / denominator_gcd) as i32;
 
             let denominator = self.denominator * rhs.denominator / denominator_gcd;
 
