@@ -1,4 +1,6 @@
-#[derive(Clone, Copy)]
+/// Represents a rational number through a fraction, storing the numerator as an `i32`, 
+/// and the denominator as a `u32`, for consistency with mathematical standards. 
+#[derive(Clone, Copy, Debug)]
 pub struct Fraction
 {
     numerator: i32,
@@ -12,6 +14,13 @@ impl Fraction
 {
     /// Creates a fraction that is fully simplified. 
     /// Will return `DivByZeroError` if denominator is 0. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let simplified = Fraction::new(2, 4).unwrap();
+    /// 
+    /// assert_eq!(simplified.get_components(), Fraction::new(1, 2).unwrap().get_components());
+    /// ```
     pub fn new(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
     {
         let fraction = Fraction::unsimplified_new(numerator, denominator)?;
@@ -21,6 +30,13 @@ impl Fraction
     
     /// Creates a fraction that has no fractional simplification applied to it. 
     /// Will return `DivByZeroError` if denominator is 0. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let unsimplified = Fraction::unsimplified_new(2, 4).unwrap();
+    /// 
+    /// assert_ne!(unsimplified.get_components(), Fraction::unsimplified_new(1, 2).unwrap().get_components());
+    /// ```
     pub fn unsimplified_new(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
     {
         if denominator == 0
@@ -33,12 +49,34 @@ impl Fraction
 
     /// Creates a fraction with no checks on the input. 
     /// Can cause arithmatic issues if the denominator is 0. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// // can be convenient for hardcoding values
+    /// let one_half = Fraction::unchecked_new(1, 2);
+    /// 
+    /// let invalid = Fraction::unchecked_new(1, 0);
+    /// 
+    /// assert_eq!(invalid.get_denominator(), 0);
+    /// ```
     pub fn unchecked_new(numerator: i32, denominator: u32) -> Fraction
     {
         Fraction {numerator, denominator}
     }
 
-    /// Note that fractions created with `Fraction::new` will be simplified on creation. 
+    /// Simplifies a fraction by dividing both the numerator and the denominator
+    /// by their greatest common factor. 
+    /// Note that fractions created with `Fraction::new` are simplified uppon creation. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let unsimplified = Fraction::unchecked_new(2, 4);
+    /// let simplified = unsimplified.simplify();
+    /// 
+    /// let also_simplified = Fraction::new(2, 4).unwrap();
+    /// 
+    /// assert_eq!(simplified.get_components(), also_simplified.get_components());
+    /// ```
     pub fn simplify(&self) -> Fraction
     {
         let gcd = gcd(self.numerator.abs() as u32, self.denominator);
@@ -50,31 +88,97 @@ impl Fraction
     }
     
     /// Creates a fraction with `value` as the numerator and 1 as the denominator. 
+    /// The returned fraction will represent the same number as `value`. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let a = Fraction::from_i32(2);
+    /// let b = Fraction::unchecked_new(2, 1);
+    /// 
+    /// assert_eq!(a, b);
+    /// ```
     pub fn from_i32(value: i32) -> Fraction
     {
         Fraction::unchecked_new(value, 1)
     }
     
+    /// Returns a tuple with the numerator for the first value, and the denominator
+    /// for the second. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// 
+    /// assert_eq!(fraction.get_components(), (1, 2));
+    /// ```
+    /// Can be used to compare fractions by their constituents in stead of by the
+    /// value they represend. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let a = Fraction::unchecked_new(1, 2);
+    /// let b = Fraction::unchecked_new(1, 2);
+    /// let c = Fraction::unchecked_new(2, 4);
+    /// 
+    /// assert_eq!(a.get_components(), b.get_components());
+    /// assert_ne!(a.get_components(), c.get_components());
+    /// ```
     pub fn get_components(&self) -> (i32, u32)
     {
         (self.numerator, self.denominator)
     }
 
+    /// Returns the numerator of this fraction. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// 
+    /// assert_eq!(fraction.get_numerator(), 1);
+    /// ```
     pub fn get_numerator(&self) -> i32
     {
         self.numerator
     }
 
+    /// Returbs the denominator of this fraction
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// 
+    /// assert_eq!(fraction.get_denominator(), 2);
+    /// ```
     pub fn get_denominator(&self) -> u32
     {
         self.denominator
     }
 
+    /// Returns the numerator divided by the denominator, as an `f64`. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let fraction = Fraction::unchecked_new(1, 3);
+    /// let float_value = fraction.to_f64();
+    /// 
+    /// assert_eq!(float_value, 1.0 / 3.0);
+    /// ```
     pub fn to_f64(&self) -> f64
     {
         (self.numerator as f64) / (self.denominator as f64)
     }
 
+    /// Finds the closest fractional value to `value`, with a tolerance of
+    /// `error`. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// // note that the error given is unusually low for
+    /// // the purpose of demonstration
+    /// let fraction = Fraction::from_f64(0.33333, 0.00001);
+    /// 
+    /// assert_eq!(fraction, Fraction::unchecked_new(1, 3));
+    /// ```
     pub fn from_f64(value: f64, error: f64) -> Fraction
     {
         let integer_part = value.floor();
@@ -256,17 +360,45 @@ impl std::ops::MulAssign for Fraction
 
 impl Fraction
 {
-    pub fn signum(&self) -> i32
+    /// Returns the signum of the numerator (denominator is always positive). 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let fraction = Fraction::unchecked_new(-5, 2);
+    /// 
+    /// assert_eq!(fraction.signum(), -1);
+    /// ```
+    pub fn signum(self) -> i32
     {
         self.numerator.signum()
     }
-}
 
-impl Fraction
-{
+    /// Returns a fraction with the numerator and denominator of `self` switched,
+    /// perserving the sign of the numerator, returning a `DivByZeroError` if the
+    /// denominator is zero. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// 
+    /// assert_eq!(fraction.reciprocal().unwrap(), Fraction::unchecked_new(2, 1));
+    /// ```
     pub fn reciprocal(self) -> Result<Fraction, DivByZeroError>
     {
         Fraction::unsimplified_new(self.denominator as i32 * self.numerator.signum(), self.numerator.abs() as u32)
+    }
+
+    /// Returns the absolute value of the fraction. 
+    /// ```
+    /// use fraction::Fraction;
+    /// 
+    /// let fraction = Fraction::unchecked_new(-1, 2);
+    /// 
+    /// assert_eq!(fraction.abs(), Fraction::unchecked_new(1, 2));
+    /// ```
+    pub fn abs(self) -> Fraction
+    {
+        Fraction::unchecked_new(self.numerator.abs(), self.denominator)
     }
 }
 
