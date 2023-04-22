@@ -18,4 +18,8 @@ fn main()
 
     println!("{float_value} = {c}");
     println!("{c} = {}", c.to_f64());
+
+    println!();
+
+    println!("{}", Complex::from_i32_pair(10, -4))
 }
