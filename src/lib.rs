@@ -438,6 +438,7 @@ impl std::ops::DivAssign for Fraction
     }
 }
 
+/// computes the greatest common divisor between the two numbers
 fn gcd(a: u32, b: u32) -> u32
 {
     let (mut small, mut large) = get_ordering(a, b);
