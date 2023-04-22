@@ -70,6 +70,16 @@ impl std::fmt::Display for Complex
     }
 }
 
+impl PartialEq for Complex
+{
+    fn eq(&self, other: &Self) -> bool
+    {
+        self.real == other.real && self.imaginary == other.imaginary
+    }
+}
+
+impl Eq for Complex {}
+
 impl std::ops::Add<Complex> for Complex
 {
     type Output = Complex;
