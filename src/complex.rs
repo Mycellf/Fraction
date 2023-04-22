@@ -29,6 +29,23 @@ impl Complex
         Complex {real, imaginary}
     }
 
+    /// Creates a complex number with the given fraction as its real component, 
+    /// and 0 for its imaginary component. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let real = Fraction::unchecked_new(1, 2);
+    /// 
+    /// let complex = Complex::from_fraction(real);
+    /// 
+    /// assert_eq!(complex.get_real(), real);
+    /// ```
+    pub fn from_fraction(value: Fraction) -> Complex
+    {
+        Complex::new(value, Fraction::from_i32(0))
+    }
+
     /// Creates a complex number with the given integer as its real component, 
     /// and 0 for its imaginary component. 
     /// 
