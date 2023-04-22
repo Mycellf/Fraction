@@ -29,26 +29,88 @@ impl Complex
         Complex {real, imaginary}
     }
 
+    /// Creates a complex number with the given integer as its real component, 
+    /// and 0 for its imaginary component. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let real = 10;
+    /// 
+    /// let complex = Complex::from_i32(real);
+    /// 
+    /// assert_eq!(complex.get_real(), Fraction::from_i32(real));
+    /// ```
     pub fn from_i32(value: i32) -> Complex
     {
         Complex::from_i32_pair(value, 0)
     }
 
+    /// Creates a complex number with the given integer argumments for
+    /// its real and imaginary components. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let real = 10;
+    /// let imaginary = 4;
+    /// 
+    /// let complex = Complex::from_i32_pair(real, imaginary);
+    /// 
+    /// assert_eq!(complex.get_components(), (Fraction::from_i32(real), Fraction::from_i32(imaginary)));
+    /// ```
     pub fn from_i32_pair(real: i32, imaginary: i32) -> Complex
     {
         Complex {real: Fraction::from_i32(real), imaginary: Fraction::from_i32(imaginary)}
     }
 
+    /// Returns the real and imaginary components of the complex
+    /// number in a tuple. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let real = Fraction::unchecked_new(1, 2);
+    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// 
+    /// let complex = Complex::new(real, imaginary);
+    /// 
+    /// assert_eq!(complex.get_components(), (real, imaginary));
+    /// ```
     pub fn get_components(&self) -> (Fraction, Fraction)
     {
         (self.real, self.imaginary)
     }
 
+    /// Returns the real component of the complex number. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let real = Fraction::unchecked_new(1, 2);
+    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// 
+    /// let complex = Complex::new(real, imaginary);
+    /// 
+    /// assert_eq!(complex.get_real(), real);
+    /// ```
     pub fn get_real(&self) -> Fraction
     {
         self.real
     }
 
+    /// Returns the imaginary component of the complex number. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let real = Fraction::unchecked_new(1, 2);
+    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// 
+    /// let complex = Complex::new(real, imaginary);
+    /// 
+    /// assert_eq!(complex.get_imaginary(), imaginary);
+    /// ```
     pub fn get_imaginary(&self) -> Fraction
     {
         self.imaginary
@@ -126,6 +188,15 @@ impl std::ops::Mul<Complex> for Complex
 
 impl Complex
 {
+    /// Returns the complex conjugate of the number. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let complex = Complex::from_i32_pair(1, 5);
+    /// 
+    /// assert_eq!(complex.conjugate(), Complex::from_i32_pair(1, -5));
+    /// ```
     pub fn conjugate(self) -> Complex
     {
         Complex::new(self.real, -self.imaginary)
