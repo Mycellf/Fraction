@@ -372,7 +372,10 @@ impl std::ops::MulAssign for Fraction
 
 impl Fraction
 {
-    /// Returns the signum of the numerator (denominator is always positive). 
+    /// Returns a number representing the sign of the fraction. 
+    /// - `0` if the number is 0
+    /// - `1` if the number is positive
+    /// - `-1` if the number is negative
     /// 
     /// ```
     /// use fraction::Fraction;
