@@ -69,3 +69,17 @@ impl std::ops::Sub<Complex> for Complex
         self + (-rhs)
     }
 }
+
+impl std::ops::Mul<Complex> for Complex
+{
+    type Output = Complex;
+
+    fn mul(self, rhs: Complex) -> Self::Output
+    {
+        Complex::new
+        (
+            self.real * rhs.real - self.imaginary * rhs.imaginary,
+            self.real * rhs.imaginary + self.imaginary * rhs.real
+        )
+    }
+}
