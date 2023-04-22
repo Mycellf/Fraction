@@ -83,3 +83,28 @@ impl std::ops::Mul<Complex> for Complex
         )
     }
 }
+
+impl Complex
+{
+    pub fn conjugate(self) -> Complex
+    {
+        Complex::new(self.real, -self.imaginary)
+    }
+}
+
+impl std::ops::Div<Complex> for Complex
+{
+    type Output = Complex;
+
+    fn div(self, rhs: Complex) -> Self::Output
+    {
+        let conjugate = rhs.conjugate();
+
+        let numerator = self * conjugate;
+
+        // Product of rhs and rhs.conjugate
+        let denominator = rhs.real * rhs.real + rhs.imaginary * rhs.imaginary;
+
+        Complex::new(numerator.real / denominator, numerator.imaginary / denominator)
+    }
+}
