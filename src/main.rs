@@ -1,4 +1,4 @@
-use ::fraction::*;
+use ::fraction::{Fraction, Complex};
 
 fn main()
 {
