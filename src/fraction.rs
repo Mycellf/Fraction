@@ -185,8 +185,6 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// // note that the error given is unusually low for
-    /// // the purpose of demonstration
     /// let fraction = Fraction::from_f64(0.33333, 0.00001);
     /// 
     /// assert_eq!(fraction, Fraction::unchecked_new(1, 3));
