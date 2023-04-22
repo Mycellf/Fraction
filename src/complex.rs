@@ -49,3 +49,13 @@ impl std::ops::Add<Complex> for Complex
         Complex::new(self.real + rhs.real, self.imaginary + rhs.imaginary)
     }
 }
+
+impl std::ops::Neg for Complex
+{
+    type Output = Complex;
+
+    fn neg(self) -> Self::Output
+    {
+        Complex::new(-self.real, -self.imaginary)
+    }
+}
