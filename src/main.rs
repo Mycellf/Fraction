@@ -1,4 +1,4 @@
-use fraction::*;
+use fraction::fraction::*;
 
 fn main()
 {
