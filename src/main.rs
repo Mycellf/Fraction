@@ -27,7 +27,7 @@ fn main()
         let a = Complex::from_i32_pair(10, -4);
         let b = Complex::from_i32_pair(-1, 9);
 
-        println!("({a}) * ({b}) = {}", a * b);
+        println!("({a}) - ({b}) = {}", a - b);
 
         let c = Complex::from_i32_pair(20, -4);
         let d = Complex::from_i32_pair(3, 2);
