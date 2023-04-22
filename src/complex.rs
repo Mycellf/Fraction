@@ -39,3 +39,13 @@ impl std::fmt::Display for Complex
         }
     }
 }
+
+impl std::ops::Add<Complex> for Complex
+{
+    type Output = Complex;
+
+    fn add(self, rhs: Complex) -> Self::Output
+    {
+        Complex::new(self.real + rhs.real, self.imaginary + rhs.imaginary)
+    }
+}
