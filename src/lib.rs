@@ -20,6 +20,7 @@ impl Fraction
     /// let simplified = Fraction::new(2, 4).unwrap();
     /// 
     /// assert_eq!(simplified.get_components(), Fraction::new(1, 2).unwrap().get_components());
+    /// 
     /// ```
     pub fn new(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
     {
@@ -29,6 +30,7 @@ impl Fraction
     }
     
     /// Creates a fraction that has no fractional simplification applied to it. 
+    /// 
     /// Will return `DivByZeroError` if denominator is 0. 
     /// ```
     /// use fraction::Fraction;
@@ -49,6 +51,7 @@ impl Fraction
 
     /// Creates a fraction with no checks on the input. 
     /// Can cause arithmatic issues if the denominator is 0. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -67,6 +70,7 @@ impl Fraction
     /// Simplifies a fraction by dividing both the numerator and the denominator
     /// by their greatest common factor. 
     /// Note that fractions created with `Fraction::new` are simplified uppon creation. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -89,6 +93,7 @@ impl Fraction
     
     /// Creates a fraction with `value` as the numerator and 1 as the denominator. 
     /// The returned fraction will represent the same number as `value`. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -104,6 +109,7 @@ impl Fraction
     
     /// Returns a tuple with the numerator for the first value, and the denominator
     /// for the second. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -111,8 +117,10 @@ impl Fraction
     /// 
     /// assert_eq!(fraction.get_components(), (1, 2));
     /// ```
+    /// 
     /// Can be used to compare fractions by their constituents in stead of by the
     /// value they represend. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -129,6 +137,7 @@ impl Fraction
     }
 
     /// Returns the numerator of this fraction. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -142,6 +151,7 @@ impl Fraction
     }
 
     /// Returbs the denominator of this fraction
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -155,6 +165,7 @@ impl Fraction
     }
 
     /// Returns the numerator divided by the denominator, as an `f64`. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -170,6 +181,7 @@ impl Fraction
 
     /// Finds the closest fractional value to `value`, with a tolerance of
     /// `error`. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -361,6 +373,7 @@ impl std::ops::MulAssign for Fraction
 impl Fraction
 {
     /// Returns the signum of the numerator (denominator is always positive). 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -376,6 +389,7 @@ impl Fraction
     /// Returns a fraction with the numerator and denominator of `self` switched,
     /// perserving the sign of the numerator, returning a `DivByZeroError` if the
     /// denominator is zero. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
@@ -389,6 +403,7 @@ impl Fraction
     }
 
     /// Returns the absolute value of the fraction. 
+    /// 
     /// ```
     /// use fraction::Fraction;
     /// 
