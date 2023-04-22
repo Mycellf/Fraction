@@ -1,5 +1,7 @@
 use crate::Fraction;
 
+/// Represents a complex number through two `Fraction`s, one for the real
+/// component, and one for the imaginary component. 
 #[derive(Clone, Copy, Debug)]
 pub struct Complex
 {
@@ -9,6 +11,19 @@ pub struct Complex
 
 impl Complex
 {
+    /// Creates a complex number with the given fractional argumments for
+    /// its real and imaginary components. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let real = Fraction::unchecked_new(1, 2);
+    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// 
+    /// let complex = Complex::new(real, imaginary);
+    /// 
+    /// assert_eq!(complex.get_components(), (real, imaginary));
+    /// ```
     pub fn new(real: Fraction, imaginary: Fraction) -> Complex
     {
         Complex {real, imaginary}
@@ -22,6 +37,21 @@ impl Complex
     pub fn from_i32_pair(real: i32, imaginary: i32) -> Complex
     {
         Complex {real: Fraction::from_i32(real), imaginary: Fraction::from_i32(imaginary)}
+    }
+
+    pub fn get_components(&self) -> (Fraction, Fraction)
+    {
+        (self.real, self.imaginary)
+    }
+
+    pub fn get_real(&self) -> Fraction
+    {
+        self.real
+    }
+
+    pub fn get_imaginary(&self) -> Fraction
+    {
+        self.imaginary
     }
 }
 
