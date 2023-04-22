@@ -59,3 +59,13 @@ impl std::ops::Neg for Complex
         Complex::new(-self.real, -self.imaginary)
     }
 }
+
+impl std::ops::Sub<Complex> for Complex
+{
+    type Output = Complex;
+
+    fn sub(self, rhs: Complex) -> Self::Output
+    {
+        self + (-rhs)
+    }
+}
