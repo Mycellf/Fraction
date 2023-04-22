@@ -152,6 +152,14 @@ impl std::ops::Add<Complex> for Complex
     }
 }
 
+impl std::ops::AddAssign for Complex
+{
+    fn add_assign(&mut self, rhs: Self)
+    {
+        *self = *self + rhs;
+    }
+}
+
 impl std::ops::Neg for Complex
 {
     type Output = Complex;
@@ -172,6 +180,14 @@ impl std::ops::Sub<Complex> for Complex
     }
 }
 
+impl std::ops::SubAssign for Complex
+{
+    fn sub_assign(&mut self, rhs: Self)
+    {
+        *self = *self - rhs;
+    }
+}
+
 impl std::ops::Mul<Complex> for Complex
 {
     type Output = Complex;
@@ -183,6 +199,14 @@ impl std::ops::Mul<Complex> for Complex
             self.real * rhs.real - self.imaginary * rhs.imaginary,
             self.real * rhs.imaginary + self.imaginary * rhs.real
         )
+    }
+}
+
+impl std::ops::MulAssign for Complex
+{
+    fn mul_assign(&mut self, rhs: Self)
+    {
+        *self = *self * rhs;
     }
 }
 
@@ -213,9 +237,17 @@ impl std::ops::Div<Complex> for Complex
 
         let numerator = self * conjugate;
 
-        // Product of rhs and rhs.conjugate
+        // Product of rhs and rhs.conjugate()
         let denominator = rhs.real * rhs.real + rhs.imaginary * rhs.imaginary;
 
         Complex::new(numerator.real / denominator, numerator.imaginary / denominator)
+    }
+}
+
+impl std::ops::DivAssign for Complex
+{
+    fn div_assign(&mut self, rhs: Self)
+    {
+        *self = *self / rhs;
     }
 }
