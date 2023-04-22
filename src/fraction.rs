@@ -15,7 +15,7 @@ impl Fraction
     /// Creates a fraction that is fully simplified. 
     /// Will return `DivByZeroError` if denominator is 0. 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let simplified = Fraction::new(2, 4).unwrap();
     /// 
@@ -33,7 +33,7 @@ impl Fraction
     /// 
     /// Will return `DivByZeroError` if denominator is 0. 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let unsimplified = Fraction::unsimplified_new(2, 4).unwrap();
     /// 
@@ -53,7 +53,7 @@ impl Fraction
     /// Can cause arithmatic issues if the denominator is 0. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// // can be convenient for hardcoding values
     /// let one_half = Fraction::unchecked_new(1, 2);
@@ -72,7 +72,7 @@ impl Fraction
     /// Note that fractions created with `Fraction::new` are simplified uppon creation. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let unsimplified = Fraction::unchecked_new(2, 4);
     /// let simplified = unsimplified.simplify();
@@ -95,7 +95,7 @@ impl Fraction
     /// The returned fraction will represent the same number as `value`. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let a = Fraction::from_i32(2);
     /// let b = Fraction::unchecked_new(2, 1);
@@ -111,7 +111,7 @@ impl Fraction
     /// for the second. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let fraction = Fraction::unchecked_new(1, 2);
     /// 
@@ -122,7 +122,7 @@ impl Fraction
     /// value they represend. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let a = Fraction::unchecked_new(1, 2);
     /// let b = Fraction::unchecked_new(1, 2);
@@ -139,7 +139,7 @@ impl Fraction
     /// Returns the numerator of this fraction. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let fraction = Fraction::unchecked_new(1, 2);
     /// 
@@ -153,7 +153,7 @@ impl Fraction
     /// Returbs the denominator of this fraction
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let fraction = Fraction::unchecked_new(1, 2);
     /// 
@@ -167,7 +167,7 @@ impl Fraction
     /// Returns the numerator divided by the denominator, as an `f64`. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let fraction = Fraction::unchecked_new(1, 3);
     /// let float_value = fraction.to_f64();
@@ -183,7 +183,7 @@ impl Fraction
     /// `error`. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// // note that the error given is unusually low for
     /// // the purpose of demonstration
@@ -378,7 +378,7 @@ impl Fraction
     /// - `-1` if the number is negative
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let fraction = Fraction::unchecked_new(-5, 2);
     /// 
@@ -394,7 +394,7 @@ impl Fraction
     /// denominator is zero. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let fraction = Fraction::unchecked_new(1, 2);
     /// 
@@ -408,7 +408,7 @@ impl Fraction
     /// Returns the absolute value of the fraction. 
     /// 
     /// ```
-    /// use fraction::Fraction;
+    /// use complex::Fraction;
     /// 
     /// let fraction = Fraction::unchecked_new(-1, 2);
     /// 
