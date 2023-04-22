@@ -26,7 +26,7 @@ impl Complex
     /// ```
     pub fn new(real: Fraction, imaginary: Fraction) -> Complex
     {
-        Complex {real, imaginary: real}
+        Complex {real, imaginary}
     }
 
     /// Creates a complex number with the given fraction as its real component, 
