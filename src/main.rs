@@ -5,7 +5,7 @@ fn main()
     {
         let fraction_string = "-4 / 5";
 
-        let a = Fraction::new(10, 3).unwrap();
+        let a = Fraction::from(10, 3).unwrap();
         let b = fraction_string.parse::<Fraction>().unwrap();
 
         println!("\"{fraction_string}\" = {b}");

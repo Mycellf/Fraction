@@ -17,14 +17,14 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let simplified = Fraction::new(2, 4).unwrap();
+    /// let simplified = Fraction::from(2, 4).unwrap();
     /// 
-    /// assert_eq!(simplified.get_components(), Fraction::new(1, 2).unwrap().get_components());
+    /// assert_eq!(simplified.get_components(), Fraction::from(1, 2).unwrap().get_components());
     /// 
     /// ```
-    pub fn new(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
+    pub fn from(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
     {
-        let fraction = Fraction::unsimplified_new(numerator, denominator)?;
+        let fraction = Fraction::unsimplified_from(numerator, denominator)?;
 
         Ok(fraction.simplify())
     }
@@ -35,11 +35,11 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let unsimplified = Fraction::unsimplified_new(2, 4).unwrap();
+    /// let unsimplified = Fraction::unsimplified_from(2, 4).unwrap();
     /// 
-    /// assert_ne!(unsimplified.get_components(), Fraction::unsimplified_new(1, 2).unwrap().get_components());
+    /// assert_ne!(unsimplified.get_components(), Fraction::unsimplified_from(1, 2).unwrap().get_components());
     /// ```
-    pub fn unsimplified_new(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
+    pub fn unsimplified_from(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
     {
         if denominator == 0
         {
@@ -56,28 +56,28 @@ impl Fraction
     /// use complex::Fraction;
     /// 
     /// // can be convenient for hardcoding values
-    /// let one_half = Fraction::unchecked_new(1, 2);
+    /// let one_half = Fraction::unchecked_from(1, 2);
     /// 
-    /// let invalid = Fraction::unchecked_new(1, 0);
+    /// let invalid = Fraction::unchecked_from(1, 0);
     /// 
     /// assert_eq!(invalid.get_denominator(), 0);
     /// ```
-    pub fn unchecked_new(numerator: i32, denominator: u32) -> Fraction
+    pub fn unchecked_from(numerator: i32, denominator: u32) -> Fraction
     {
         Fraction {numerator, denominator}
     }
 
     /// Simplifies a fraction by dividing both the numerator and the denominator
     /// by their greatest common factor. 
-    /// Note that fractions created with `Fraction::new` are simplified uppon creation. 
+    /// Note that fractions created with `Fraction::from` are simplified uppon creation. 
     /// 
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let unsimplified = Fraction::unchecked_new(2, 4);
+    /// let unsimplified = Fraction::unchecked_from(2, 4);
     /// let simplified = unsimplified.simplify();
     /// 
-    /// let also_simplified = Fraction::new(2, 4).unwrap();
+    /// let also_simplified = Fraction::from(2, 4).unwrap();
     /// 
     /// assert_eq!(simplified.get_components(), also_simplified.get_components());
     /// ```
@@ -98,13 +98,13 @@ impl Fraction
     /// use complex::Fraction;
     /// 
     /// let a = Fraction::from_i32(2);
-    /// let b = Fraction::unchecked_new(2, 1);
+    /// let b = Fraction::unchecked_from(2, 1);
     /// 
     /// assert_eq!(a, b);
     /// ```
     pub fn from_i32(value: i32) -> Fraction
     {
-        Fraction::unchecked_new(value, 1)
+        Fraction::unchecked_from(value, 1)
     }
     
     /// Returns a tuple with the numerator for the first value, and the denominator
@@ -113,7 +113,7 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// let fraction = Fraction::unchecked_from(1, 2);
     /// 
     /// assert_eq!(fraction.get_components(), (1, 2));
     /// ```
@@ -124,9 +124,9 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let a = Fraction::unchecked_new(1, 2);
-    /// let b = Fraction::unchecked_new(1, 2);
-    /// let c = Fraction::unchecked_new(2, 4);
+    /// let a = Fraction::unchecked_from(1, 2);
+    /// let b = Fraction::unchecked_from(1, 2);
+    /// let c = Fraction::unchecked_from(2, 4);
     /// 
     /// assert_eq!(a.get_components(), b.get_components());
     /// assert_ne!(a.get_components(), c.get_components());
@@ -141,7 +141,7 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// let fraction = Fraction::unchecked_from(1, 2);
     /// 
     /// assert_eq!(fraction.get_numerator(), 1);
     /// ```
@@ -155,7 +155,7 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// let fraction = Fraction::unchecked_from(1, 2);
     /// 
     /// assert_eq!(fraction.get_denominator(), 2);
     /// ```
@@ -169,7 +169,7 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let fraction = Fraction::unchecked_new(1, 3);
+    /// let fraction = Fraction::unchecked_from(1, 3);
     /// let float_value = fraction.to_f64();
     /// 
     /// assert_eq!(float_value, 1.0 / 3.0);
@@ -187,7 +187,7 @@ impl Fraction
     /// 
     /// let fraction = Fraction::from_f64(0.33333, 0.00001);
     /// 
-    /// assert_eq!(fraction, Fraction::unchecked_new(1, 3));
+    /// assert_eq!(fraction, Fraction::unchecked_from(1, 3));
     /// ```
     pub fn from_f64(value: f64, error: f64) -> Fraction
     {
@@ -208,7 +208,7 @@ impl Fraction
 
         loop
         {
-            let middle = Fraction::unchecked_new
+            let middle = Fraction::unchecked_from
             (
                 lower.numerator + upper.numerator,
                 lower.denominator + upper.denominator
@@ -224,7 +224,7 @@ impl Fraction
             }
             else
             {
-                return Fraction::new
+                return Fraction::from
                 (
                     integer_part as i32 * middle.denominator as i32 + middle.numerator,
                     middle.denominator
@@ -266,7 +266,7 @@ impl std::str::FromStr for Fraction
         let numerator = numerator_str.trim().parse::<i32>().map_err(|_| ParseFractionError)?;
         let denominator = denominator_str.trim().parse::<u32>().map_err(|_| ParseFractionError)?;
 
-        Fraction::new(numerator, denominator).map_err(|_| ParseFractionError)
+        Fraction::from(numerator, denominator).map_err(|_| ParseFractionError)
     }
 }
 
@@ -309,7 +309,7 @@ impl std::ops::Add<Fraction> for Fraction
 
         let denominator = self.denominator * rhs.denominator / denominator_gcd;
 
-        Fraction::new(numerator, denominator).expect("Fraction should not have 0 for denominator")
+        Fraction::from(numerator, denominator).expect("Fraction should not have 0 for denominator")
     }
 }
 
@@ -327,7 +327,7 @@ impl std::ops::Neg for Fraction
 
     fn neg(self) -> Self::Output
     {
-        Fraction::unchecked_new(-self.numerator, self.denominator)
+        Fraction::unchecked_from(-self.numerator, self.denominator)
     }
 }
 
@@ -355,7 +355,7 @@ impl std::ops::Mul<Fraction> for Fraction
 
     fn mul(self, rhs: Fraction) -> Self::Output
     {
-        Fraction::new(self.numerator * rhs.numerator, self.denominator * rhs.denominator)
+        Fraction::from(self.numerator * rhs.numerator, self.denominator * rhs.denominator)
             .expect("Fraction should not have 0 for denominator")
     }
 }
@@ -378,7 +378,7 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let fraction = Fraction::unchecked_new(-5, 2);
+    /// let fraction = Fraction::unchecked_from(-5, 2);
     /// 
     /// assert_eq!(fraction.signum(), -1);
     /// ```
@@ -394,13 +394,13 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let fraction = Fraction::unchecked_new(1, 2);
+    /// let fraction = Fraction::unchecked_from(1, 2);
     /// 
-    /// assert_eq!(fraction.reciprocal().unwrap(), Fraction::unchecked_new(2, 1));
+    /// assert_eq!(fraction.reciprocal().unwrap(), Fraction::unchecked_from(2, 1));
     /// ```
     pub fn reciprocal(self) -> Result<Fraction, DivByZeroError>
     {
-        Fraction::unsimplified_new(self.denominator as i32 * self.numerator.signum(), self.numerator.abs() as u32)
+        Fraction::unsimplified_from(self.denominator as i32 * self.numerator.signum(), self.numerator.abs() as u32)
     }
 
     /// Returns the absolute value of the fraction. 
@@ -408,13 +408,13 @@ impl Fraction
     /// ```
     /// use complex::Fraction;
     /// 
-    /// let fraction = Fraction::unchecked_new(-1, 2);
+    /// let fraction = Fraction::unchecked_from(-1, 2);
     /// 
-    /// assert_eq!(fraction.abs(), Fraction::unchecked_new(1, 2));
+    /// assert_eq!(fraction.abs(), Fraction::unchecked_from(1, 2));
     /// ```
     pub fn abs(self) -> Fraction
     {
-        Fraction::unchecked_new(self.numerator.abs(), self.denominator)
+        Fraction::unchecked_from(self.numerator.abs(), self.denominator)
     }
 }
 

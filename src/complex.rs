@@ -17,14 +17,14 @@ impl Complex
     /// ```
     /// use complex::{Complex, Fraction};
     /// 
-    /// let real = Fraction::unchecked_new(1, 2);
-    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// let real = Fraction::unchecked_from(1, 2);
+    /// let imaginary = Fraction::unchecked_from(3, 4);
     /// 
-    /// let complex = Complex::new(real, imaginary);
+    /// let complex = Complex::from(real, imaginary);
     /// 
     /// assert_eq!(complex.get_components(), (real, imaginary));
     /// ```
-    pub fn new(real: Fraction, imaginary: Fraction) -> Complex
+    pub fn from(real: Fraction, imaginary: Fraction) -> Complex
     {
         Complex {real, imaginary}
     }
@@ -35,7 +35,7 @@ impl Complex
     /// ```
     /// use complex::{Complex, Fraction};
     /// 
-    /// let real = Fraction::unchecked_new(1, 2);
+    /// let real = Fraction::unchecked_from(1, 2);
     /// 
     /// let complex = Complex::from_fraction(real);
     /// 
@@ -43,7 +43,7 @@ impl Complex
     /// ```
     pub fn from_fraction(value: Fraction) -> Complex
     {
-        Complex::new(value, Fraction::from_i32(0))
+        Complex::from(value, Fraction::from_i32(0))
     }
 
     /// Creates a complex number with the given integer as its real component, 
@@ -87,10 +87,10 @@ impl Complex
     /// ```
     /// use complex::{Complex, Fraction};
     /// 
-    /// let real = Fraction::unchecked_new(1, 2);
-    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// let real = Fraction::unchecked_from(1, 2);
+    /// let imaginary = Fraction::unchecked_from(3, 4);
     /// 
-    /// let complex = Complex::new(real, imaginary);
+    /// let complex = Complex::from(real, imaginary);
     /// 
     /// assert_eq!(complex.get_components(), (real, imaginary));
     /// ```
@@ -104,10 +104,10 @@ impl Complex
     /// ```
     /// use complex::{Complex, Fraction};
     /// 
-    /// let real = Fraction::unchecked_new(1, 2);
-    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// let real = Fraction::unchecked_from(1, 2);
+    /// let imaginary = Fraction::unchecked_from(3, 4);
     /// 
-    /// let complex = Complex::new(real, imaginary);
+    /// let complex = Complex::from(real, imaginary);
     /// 
     /// assert_eq!(complex.get_real(), real);
     /// ```
@@ -121,10 +121,10 @@ impl Complex
     /// ```
     /// use complex::{Complex, Fraction};
     /// 
-    /// let real = Fraction::unchecked_new(1, 2);
-    /// let imaginary = Fraction::unchecked_new(3, 4);
+    /// let real = Fraction::unchecked_from(1, 2);
+    /// let imaginary = Fraction::unchecked_from(3, 4);
     /// 
-    /// let complex = Complex::new(real, imaginary);
+    /// let complex = Complex::from(real, imaginary);
     /// 
     /// assert_eq!(complex.get_imaginary(), imaginary);
     /// ```
@@ -165,7 +165,7 @@ impl std::ops::Add<Complex> for Complex
 
     fn add(self, rhs: Complex) -> Self::Output
     {
-        Complex::new(self.real + rhs.real, self.imaginary + rhs.imaginary)
+        Complex::from(self.real + rhs.real, self.imaginary + rhs.imaginary)
     }
 }
 
@@ -183,7 +183,7 @@ impl std::ops::Neg for Complex
 
     fn neg(self) -> Self::Output
     {
-        Complex::new(-self.real, -self.imaginary)
+        Complex::from(-self.real, -self.imaginary)
     }
 }
 
@@ -211,7 +211,7 @@ impl std::ops::Mul<Complex> for Complex
 
     fn mul(self, rhs: Complex) -> Self::Output
     {
-        Complex::new
+        Complex::from
         (
             self.real * rhs.real - self.imaginary * rhs.imaginary,
             self.real * rhs.imaginary + self.imaginary * rhs.real
@@ -240,7 +240,7 @@ impl Complex
     /// ```
     pub fn conjugate(self) -> Complex
     {
-        Complex::new(self.real, -self.imaginary)
+        Complex::from(self.real, -self.imaginary)
     }
 }
 
@@ -257,7 +257,7 @@ impl std::ops::Div<Complex> for Complex
         // Product of rhs and rhs.conjugate()
         let denominator = rhs.real * rhs.real + rhs.imaginary * rhs.imaginary;
 
-        Complex::new(numerator.real / denominator, numerator.imaginary / denominator)
+        Complex::from(numerator.real / denominator, numerator.imaginary / denominator)
     }
 }
 
