@@ -269,8 +269,8 @@ impl std::ops::DivAssign for Complex
 
 impl Complex
 {
-    /// Returns a pair of `i32` values with the first representing `self.getReal().signum`
-    /// and the second representing `self.getImaginary().signum`. 
+    /// Returns a pair of `i32` values with the first representing `self.get_real().signum`
+    /// and the second representing `self.get_imaginary().signum`. 
     /// 
     /// ```
     /// use complex::Complex;
