@@ -320,7 +320,7 @@ impl Complex
     /// 
     /// let value = Complex::from_i32_pair(10, -2);
     /// 
-    /// assert_eq!(value.signum(), (1, -1));
+    /// assert_eq!(value.signum(), Complex::from_i32_pair(1, -1));
     /// 
     /// assert_eq!(value.signum(), Complex::from_i32_pair(value.get_real().signum(), value.get_imaginary().signum()));
     /// ```
