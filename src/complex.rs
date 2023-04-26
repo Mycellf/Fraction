@@ -284,4 +284,10 @@ impl Complex
     {
         Complex::from_i32_pair(self.real.signum(), self.imaginary.signum())
     }
+
+    /// Returns the absolute value of this complex number, squared. 
+    pub fn abs_squared(self) -> Fraction
+    {
+        self.real * self.real + self.imaginary * self.imaginary
+    }
 }
