@@ -38,6 +38,12 @@ fn main()
         let c = Complex::from_i32_pair(20, -4);
         let d = Complex::from_i32_pair(3, 2);
 
-        println!("({c}) / ({d}) = {}", c / d)
+        println!("({c}) / ({d}) = {}", c / d);
+
+        println!();
+
+        let e = Complex::from_i32_pair(-3, 4);
+
+        println!("|{e}| = {}", e.abs());
     }
 }
