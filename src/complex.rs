@@ -268,3 +268,21 @@ impl std::ops::DivAssign for Complex
         *self = *self / rhs;
     }
 }
+
+impl Complex
+{
+    /// Returns a pair of `i32` values with the first representing `self.getReal().signum`
+    /// and the second representing `self.getImaginary().signum`. 
+    /// 
+    /// ```
+    /// use complex::Complex;
+    /// 
+    /// let value = Complex::from_i32_pair(10, -2);
+    /// 
+    /// assert_eq!(value.signum(), (value.get_real().signum(), value.get_imaginary().signum()));
+    /// ```
+    pub fn signum(self) -> (i32, i32)
+    {
+        (self.real.signum(), self.imaginary.signum())
+    }
+}
