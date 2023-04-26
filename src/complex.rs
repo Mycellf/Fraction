@@ -46,6 +46,23 @@ impl Complex
         Complex::from(value, Fraction::from_i32(0))
     }
 
+    /// Creates a complex number with the given fraction as its imaginary component, 
+    /// and 0 for its real component. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let imaginary = Fraction::unchecked_from(1, 2);
+    /// 
+    /// let complex = Complex::from_fraction_imaginary(imaginary);
+    /// 
+    /// assert_eq!(complex.get_imaginary(), imaginary);
+    /// ```
+    pub fn from_fraction_imaginary(value: Fraction) -> Complex
+    {
+        Complex::from(Fraction::from_i32(0), value)
+    }
+
     /// Creates a complex number with the given integer as its real component, 
     /// and 0 for its imaginary component. 
     /// 
@@ -61,6 +78,23 @@ impl Complex
     pub fn from_i32(value: i32) -> Complex
     {
         Complex::from_i32_pair(value, 0)
+    }
+
+    /// Creates a complex number with the given integer as its imaginary component, 
+    /// and 0 for its real component. 
+    /// 
+    /// ```
+    /// use complex::{Complex, Fraction};
+    /// 
+    /// let imaginary = 10;
+    /// 
+    /// let complex = Complex::from_i32_imaginary(imaginary);
+    /// 
+    /// assert_eq!(complex.get_imaginary(), Fraction::from_i32(imaginary));
+    /// ```
+    pub fn from_i32_imaginary(value: i32) -> Complex
+    {
+        Complex::from_i32_pair(0, value)
     }
 
     /// Creates a complex number with the given integer argumments for

@@ -5,7 +5,7 @@ fn main()
     {
         let fraction_string = "-4 / 5";
 
-        let a = Fraction::from(10, 3).unwrap();
+        let a = Fraction::unchecked_from(10, 3);
         let b = fraction_string.parse::<Fraction>().unwrap();
 
         println!("\"{fraction_string}\" = {b}");
@@ -23,8 +23,10 @@ fn main()
         println!();
 
         let d = Fraction::unchecked_from(1, 4);
+        let e = Fraction::unchecked_from(-4, 9);
 
         println!("sqrt({d}) = {}", d.sqrt());
+        println!("sqrt({e}) = {}", e.sqrt());
 
         println!();
     }

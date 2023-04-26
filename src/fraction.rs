@@ -425,7 +425,7 @@ impl Fraction
 
         if self.numerator < 0
         {
-            Complex::from(Fraction::from_i32(0), value)
+            Complex::from_fraction_imaginary(Fraction::from_i32(0))
         }
         else
         {
