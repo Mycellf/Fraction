@@ -21,6 +21,12 @@ fn main()
         println!("{c} = {}", c.to_f64());
 
         println!();
+
+        let d = Fraction::unchecked_from(1, 4);
+
+        println!("sqrt({d}) = {}", d.sqrt());
+
+        println!();
     }
 
     {

@@ -416,6 +416,11 @@ impl Fraction
     {
         Fraction::unchecked_from(self.numerator.abs(), self.denominator)
     }
+
+    pub fn sqrt(self) -> Fraction
+    {
+        Fraction::from_f64(self.to_f64().sqrt(), 0.000000000001)
+    }
 }
 
 impl std::ops::Div<Fraction> for Fraction
