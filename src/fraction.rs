@@ -24,11 +24,15 @@ impl Fraction
     /// assert_eq!(simplified.get_components(), Fraction::from(1, 2).unwrap().get_components());
     /// 
     /// ```
-    pub fn from(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
+    pub const fn from(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
     {
-        let fraction = Fraction::unsimplified_from(numerator, denominator)?;
+        let fraction = Fraction::unsimplified_from(numerator, denominator);
 
-        Ok(fraction.simplify())
+        match fraction
+        {
+            Ok(value) => Ok(value.simplify()),
+            Err(value) => Err(value)
+        }
     }
     
     /// Creates a fraction that has no fractional simplification applied to it. 
@@ -41,7 +45,7 @@ impl Fraction
     /// 
     /// assert_ne!(unsimplified.get_components(), Fraction::unsimplified_from(1, 2).unwrap().get_components());
     /// ```
-    pub fn unsimplified_from(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
+    pub const fn unsimplified_from(numerator: i32, denominator: u32) -> Result<Fraction, DivByZeroError>
     {
         if denominator == 0
         {
@@ -64,7 +68,7 @@ impl Fraction
     /// 
     /// assert_eq!(invalid.get_denominator(), 0);
     /// ```
-    pub fn unchecked_from(numerator: i32, denominator: u32) -> Fraction
+    pub const fn unchecked_from(numerator: i32, denominator: u32) -> Fraction
     {
         Fraction {numerator, denominator}
     }
@@ -83,7 +87,7 @@ impl Fraction
     /// 
     /// assert_eq!(simplified.get_components(), also_simplified.get_components());
     /// ```
-    pub fn simplify(&self) -> Fraction
+    pub const fn simplify(&self) -> Fraction
     {
         let gcd = gcd(self.numerator.abs() as u32, self.denominator);
 
@@ -104,7 +108,7 @@ impl Fraction
     /// 
     /// assert_eq!(a, b);
     /// ```
-    pub fn from_i32(value: i32) -> Fraction
+    pub const fn from_i32(value: i32) -> Fraction
     {
         Fraction::unchecked_from(value, 1)
     }
@@ -133,7 +137,7 @@ impl Fraction
     /// assert_eq!(a.get_components(), b.get_components());
     /// assert_ne!(a.get_components(), c.get_components());
     /// ```
-    pub fn get_components(&self) -> (i32, u32)
+    pub const fn get_components(&self) -> (i32, u32)
     {
         (self.numerator, self.denominator)
     }
@@ -147,7 +151,7 @@ impl Fraction
     /// 
     /// assert_eq!(fraction.get_numerator(), 1);
     /// ```
-    pub fn get_numerator(&self) -> i32
+    pub const fn get_numerator(&self) -> i32
     {
         self.numerator
     }
@@ -161,7 +165,7 @@ impl Fraction
     /// 
     /// assert_eq!(fraction.get_denominator(), 2);
     /// ```
-    pub fn get_denominator(&self) -> u32
+    pub const fn get_denominator(&self) -> u32
     {
         self.denominator
     }
@@ -384,7 +388,7 @@ impl Fraction
     /// 
     /// assert_eq!(fraction.signum(), -1);
     /// ```
-    pub fn signum(self) -> i32
+    pub const fn signum(self) -> i32
     {
         self.numerator.signum()
     }
@@ -400,7 +404,7 @@ impl Fraction
     /// 
     /// assert_eq!(fraction.reciprocal().unwrap(), Fraction::unchecked_from(2, 1));
     /// ```
-    pub fn reciprocal(self) -> Result<Fraction, DivByZeroError>
+    pub const fn reciprocal(self) -> Result<Fraction, DivByZeroError>
     {
         Fraction::unsimplified_from(self.denominator as i32 * self.numerator.signum(), self.numerator.abs() as u32)
     }
@@ -414,7 +418,7 @@ impl Fraction
     /// 
     /// assert_eq!(fraction.abs(), Fraction::unchecked_from(1, 2));
     /// ```
-    pub fn abs(self) -> Fraction
+    pub const fn abs(self) -> Fraction
     {
         Fraction::unchecked_from(self.numerator.abs(), self.denominator)
     }
@@ -453,7 +457,7 @@ impl std::ops::DivAssign for Fraction
 }
 
 /// computes the greatest common divisor between the two numbers
-fn gcd(a: u32, b: u32) -> u32
+const fn gcd(a: u32, b: u32) -> u32
 {
     let (mut small, mut large) = get_ordering(a, b);
 
@@ -477,7 +481,7 @@ fn gcd(a: u32, b: u32) -> u32
 }
 
 /// returns a pair with the smallest value first
-fn get_ordering<T: PartialOrd>(a: T, b: T) -> (T, T)
+const fn get_ordering(a: u32, b: u32) -> (u32, u32)
 {
     if a < b
     {

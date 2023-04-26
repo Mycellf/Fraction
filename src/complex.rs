@@ -24,7 +24,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_components(), (real, imaginary));
     /// ```
-    pub fn from(real: Fraction, imaginary: Fraction) -> Complex
+    pub const fn from(real: Fraction, imaginary: Fraction) -> Complex
     {
         Complex {real, imaginary}
     }
@@ -41,7 +41,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_real(), real);
     /// ```
-    pub fn from_fraction(value: Fraction) -> Complex
+    pub const fn from_fraction(value: Fraction) -> Complex
     {
         Complex::from(value, Fraction::from_i32(0))
     }
@@ -58,7 +58,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_imaginary(), imaginary);
     /// ```
-    pub fn from_fraction_imaginary(value: Fraction) -> Complex
+    pub const fn from_fraction_imaginary(value: Fraction) -> Complex
     {
         Complex::from(Fraction::from_i32(0), value)
     }
@@ -75,7 +75,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_real(), Fraction::from_i32(real));
     /// ```
-    pub fn from_i32(value: i32) -> Complex
+    pub const fn from_i32(value: i32) -> Complex
     {
         Complex::from_i32_pair(value, 0)
     }
@@ -92,7 +92,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_imaginary(), Fraction::from_i32(imaginary));
     /// ```
-    pub fn from_i32_imaginary(value: i32) -> Complex
+    pub const fn from_i32_imaginary(value: i32) -> Complex
     {
         Complex::from_i32_pair(0, value)
     }
@@ -110,7 +110,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_components(), (Fraction::from_i32(real), Fraction::from_i32(imaginary)));
     /// ```
-    pub fn from_i32_pair(real: i32, imaginary: i32) -> Complex
+    pub const fn from_i32_pair(real: i32, imaginary: i32) -> Complex
     {
         Complex {real: Fraction::from_i32(real), imaginary: Fraction::from_i32(imaginary)}
     }
@@ -128,7 +128,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_components(), (real, imaginary));
     /// ```
-    pub fn get_components(&self) -> (Fraction, Fraction)
+    pub const fn get_components(&self) -> (Fraction, Fraction)
     {
         (self.real, self.imaginary)
     }
@@ -145,7 +145,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_real(), real);
     /// ```
-    pub fn get_real(&self) -> Fraction
+    pub const fn get_real(&self) -> Fraction
     {
         self.real
     }
@@ -162,7 +162,7 @@ impl Complex
     /// 
     /// assert_eq!(complex.get_imaginary(), imaginary);
     /// ```
-    pub fn get_imaginary(&self) -> Fraction
+    pub const fn get_imaginary(&self) -> Fraction
     {
         self.imaginary
     }
@@ -324,7 +324,7 @@ impl Complex
     /// 
     /// assert_eq!(value.signum(), Complex::from_i32_pair(value.get_real().signum(), value.get_imaginary().signum()));
     /// ```
-    pub fn signum(self) -> Complex
+    pub const fn signum(self) -> Complex
     {
         Complex::from_i32_pair(self.real.signum(), self.imaginary.signum())
     }
