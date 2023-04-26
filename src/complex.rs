@@ -290,4 +290,10 @@ impl Complex
     {
         self.real * self.real + self.imaginary * self.imaginary
     }
+
+    /// Returns the absolute value of this complex number. 
+    pub fn abs(self) -> Fraction
+    {
+        self.abs_squared().sqrt()
+    }
 }
