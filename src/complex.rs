@@ -138,13 +138,23 @@ impl std::fmt::Display for Complex
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
     {
+        if self.imaginary.get_numerator() == 0
+        {
+            return  write!(f, "{}", self.real);
+        }
+
+        if self.real.get_numerator() == 0
+        {
+            return write!(f, "{}i", self.imaginary);
+        }
+
         if self.imaginary >= Fraction::from_i32(0)
         {
-            write!(f, "{} + {}i", self.real, self.imaginary)
+            return write!(f, "{} + {}i", self.real, self.imaginary);
         }
         else
         {
-            write!(f, "{} - {}i", self.real, self.imaginary.abs())
+            return write!(f, "{} - {}i", self.real, self.imaginary.abs());
         }
     }
 }

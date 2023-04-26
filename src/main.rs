@@ -45,5 +45,10 @@ fn main()
         let e = Complex::from_i32_pair(-3, 4);
 
         println!("|{e}| = {}", e.abs());
+
+        let f = Complex::from_i32(5);
+        let g = Complex::from_i32_pair(0, -3);
+
+        println!("{f} * {g} = {}", f * g);
     }
 }
