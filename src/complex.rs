@@ -250,9 +250,7 @@ impl std::ops::Div<Complex> for Complex
 
     fn div(self, rhs: Complex) -> Self::Output
     {
-        let conjugate = rhs.conjugate();
-
-        let numerator = self * conjugate;
+        let numerator = self * rhs.conjugate();
 
         // Product of rhs and rhs.conjugate()
         let denominator = rhs.real * rhs.real + rhs.imaginary * rhs.imaginary;
