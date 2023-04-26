@@ -1,3 +1,5 @@
+use crate::Complex;
+
 /// Represents a rational number through a fraction, storing the numerator as an `i32`, 
 /// and the denominator as a `u32`, for consistency with mathematical standards. 
 #[derive(Clone, Copy, Debug)]
@@ -417,9 +419,18 @@ impl Fraction
         Fraction::unchecked_from(self.numerator.abs(), self.denominator)
     }
 
-    pub fn sqrt(self) -> Fraction
+    pub fn sqrt(self) -> Complex
     {
-        Fraction::from_f64(self.to_f64().sqrt(), 0.000000000001)
+        let value = Fraction::from_f64(self.abs().to_f64().sqrt(), 0.000000000001);
+
+        if self.numerator < 0
+        {
+            Complex::from(Fraction::from_i32(0), value)
+        }
+        else
+        {
+            Complex::from_fraction(value)
+        }
     }
 }
 

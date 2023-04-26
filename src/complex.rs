@@ -304,6 +304,6 @@ impl Complex
     /// Returns the absolute value of this complex number. 
     pub fn abs(self) -> Fraction
     {
-        self.abs_squared().sqrt()
+        self.abs_squared().sqrt().real
     }
 }
